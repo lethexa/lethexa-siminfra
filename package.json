@@ -11,8 +11,7 @@
     "type": "git",
     "url": "git@github.com:lethexa/lethexa-simexec.git"
   },
-  "keywords": [
-  ],
+  "keywords": [],
   "author": "Tim Leerhoff",
   "license": "MIT",
   "devDependencies": {
@@ -27,6 +26,7 @@
     "mocha": "^2.2.5"
   },
   "dependencies": {
-    "amqplib": "^0.4.0"
+    "amqplib": "^0.4.0",
+    "lethexa-scheduler": "0.0.5"
   }
 }

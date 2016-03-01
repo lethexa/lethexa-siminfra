@@ -9,7 +9,7 @@ var model3 = new model.TestModel(simExec, 'Model3');
 
 setTimeout( function() {
   simExec.terminate();
-}, 10000);
+}, 5000);
 
 simExec.start();
 
