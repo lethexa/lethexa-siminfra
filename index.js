@@ -21,5 +21,5 @@ exec.run();
 
 setTimeout(function() {
   exec.terminate();
-}, 5000);
+}, 10000);
 
