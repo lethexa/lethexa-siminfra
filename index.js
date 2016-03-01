@@ -1,16 +1,23 @@
-var sim = require('./lib/simexec');
-var model = require('./lib/testmodel');
+var sim = require('./lib/scenario');
 
-var simExec = new sim.SimExecution();
+var scnDef = {
+  models: [{
+    name: 'test1'
+  }, {
+    name: 'test2'
+  }]
+};
 
-var model1 = new model.TestModel(simExec, 'Model1');
-var model2 = new model.TestModel(simExec, 'Model2');
-var model3 = new model.TestModel(simExec, 'Model3');
 
-setTimeout( function() {
-  simExec.terminate();
+var objectFactory = new sim.ObjectFactory();
+var scenarioFactory = new sim.ScenarioFactory(objectFactory);
+
+var scenario = scenarioFactory.createScenario(scnDef);
+
+var exec = new sim.Executor(scenario);
+exec.run();
+
+setTimeout(function() {
+  exec.terminate();
 }, 5000);
-
-simExec.start();
-
 
