@@ -2,9 +2,11 @@ var sim = require('./lib/scenario');
 
 var scnDef = {
   models: [{
-    name: 'test1'
+    name: 'test1',
+    tickRate: 1.5
   }, {
-    name: 'test2'
+    name: 'test2',
+    tickRate: 2.5
   }]
 };
 
