@@ -1,7 +1,7 @@
 {
-  "name": "lethexa-simexec",
+  "name": "lethexa-siminfra",
   "version": "0.0.1",
-  "description": "Provides a simulation execution for simmodels",
+  "description": "Provides a simulation infrastructure for simmodels",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:lethexa/lethexa-simexec.git"
+    "url": "git@github.com:lethexa/lethexa-siminfra.git"
   },
   "keywords": [],
   "author": "Tim Leerhoff",
@@ -26,7 +26,6 @@
     "mocha": "^2.2.5"
   },
   "dependencies": {
-    "amqplib": "^0.4.0",
     "lethexa-scheduler": "0.0.5"
   }
 }

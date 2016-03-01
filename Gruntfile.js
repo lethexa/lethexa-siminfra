@@ -24,7 +24,7 @@ module.exports = function (grunt) {
             separator: ';',
           },
           dist: {
-            src: ['lib/simexec.js'],
+            src: ['lib/*.js'],
             dest: '<%= pkg.name %>.js',
           },
         },
@@ -105,5 +105,5 @@ module.exports = function (grunt) {
     grunt.registerTask('test', ['mochaTest']);
     grunt.registerTask('coverage', ['jshint', 'env:coverage', 'instrument', 'mochaTest', 'storeCoverage', 'makeReport']);
     grunt.registerTask('jenkins', ['jshint', 'env:coverage', 'instrument', 'mochaTest', 'storeCoverage', 'makeReport']);
-    grunt.registerTask('default', ['jshint', 'mochaTest', 'concat', 'yuidoc', 'uglify']);
+    grunt.registerTask('default', ['jshint', 'mochaTest', 'yuidoc']);
 };
