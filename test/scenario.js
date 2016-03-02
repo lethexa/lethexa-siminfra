@@ -6,7 +6,7 @@ var scnDef = {
   models: []
 };
 
-describe('scenario', function () {
+describe('Scenario', function () {
   describe('when a model is registered in scenario', function () {
     it('should call init', function () {
       var initCalled = false;	
