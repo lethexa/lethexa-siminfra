@@ -80,18 +80,18 @@ describe('SimFlow', function () {
     });
   });
 
-  describe('when a simflow is terminated', function () {
+  describe('when a simflow is ticked', function () {
     it('should return delta time on next tick', function () {
       var objectFactory = new sim.ObjectFactory();
       var scenarioFactory = new sim.ScenarioFactory(objectFactory);
       var scenario = scenarioFactory.createScenario(scnDef);
-      var simFlow = new sim.SimFlow(scenario);
+      var simFlow = new sim.SimFlow(scenario, 0.5);
 
       simFlow.start();
       simFlow.tickNext();
       var dt = simFlow.tickNext();
 
-      assert.equal(1.0, dt);
+      assert.equal(0.5, dt);
     });
   });
 
