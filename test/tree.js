@@ -30,6 +30,34 @@ describe('TreeNode', function () {
     });
   });
 
+  describe('when a treenode is iterated preorder', function () {
+    it('the parent is called first then the child', function () {
+      var root = tree.createTreeNode('root');
+      var child = root.createChild('child');
+      var result = [];
+      root.preOrderIterate(function(node) {
+        result.push(node);
+      });      
+
+      assert.equal(root, result[0]);
+      assert.equal(child, result[1]);
+    });
+  });
+
+  describe('when a treenode is iterated postorder', function () {
+    it('the child is called first then the parent', function () {
+      var root = tree.createTreeNode('root');
+      var child = root.createChild('child');
+      var result = [];
+      root.postOrderIterate(function(node) {
+        result.push(node);
+      });      
+
+      assert.equal(child, result[0]);
+      assert.equal(root, result[1]);
+    });
+  });
+
 });
 
 
