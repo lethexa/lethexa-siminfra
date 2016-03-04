@@ -61,3 +61,51 @@ describe('TreeNode', function () {
 });
 
 
+
+
+
+describe('Tree', function () {
+  var TestNode = function(name, children) {
+    this.name = name;
+    this.getChildren = function() {
+      return children;
+    };
+  };
+
+  describe('when child is created in tree', function () {
+    it('a sequece of nodes is added', function () {
+      var node3 = new TestNode('N3', []);
+      var node2 = new TestNode('N2', [node3]);
+      var node1 = new TestNode('N1', [node2]);
+      var result = [];
+      var theTree = tree.createTree();
+      theTree.on('add', function(node) {
+        result.push(node);
+      });
+      theTree.addSubTree(node1,node2);
+
+      assert.equal(node2, result[0]);
+      assert.equal(node3, result[1]);
+    });
+  });
+
+  describe('when child is removed from tree', function () {
+    it('a sequence of nodes is removed', function () {
+      var node3 = new TestNode('N3', []);
+      var node2 = new TestNode('N2', [node3]);
+      var node1 = new TestNode('N1', [node2]);
+      var result = [];
+      var theTree = tree.createTree();
+      theTree.on('remove', function(node) {
+        result.push(node);
+      });
+      theTree.removeSubTree(node1,node2);
+
+      assert.equal(node3, result[0]);
+      assert.equal(node2, result[1]);
+    });
+  });
+
+});
+
+
