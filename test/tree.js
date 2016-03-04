@@ -72,8 +72,8 @@ describe('Tree', function () {
     };
   };
 
-  describe('when child is created in tree', function () {
-    it('a sequece of nodes is added', function () {
+  describe('when children are created in the tree', function () {
+    it('a sequence of nodes is added', function () {
       var node3 = new TestNode('N3', []);
       var node2 = new TestNode('N2', [node3]);
       var node1 = new TestNode('N1', [node2]);
@@ -89,7 +89,7 @@ describe('Tree', function () {
     });
   });
 
-  describe('when child is removed from tree', function () {
+  describe('when children are removed from tree', function () {
     it('a sequence of nodes is removed', function () {
       var node3 = new TestNode('N3', []);
       var node2 = new TestNode('N2', [node3]);
