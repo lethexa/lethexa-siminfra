@@ -24,7 +24,7 @@ describe('TreeNode', function () {
         eventsGenerated += 1;
       });
       var child = root.createChild('child');
-      root.remove(child);
+      root.removeChild(child);
 
       assert.equal(1, eventsGenerated);
     });
@@ -78,14 +78,15 @@ describe('Tree', function () {
       var node2 = new TestNode('N2', [node3]);
       var node1 = new TestNode('N1', [node2]);
       var result = [];
-      var theTree = tree.createTree();
+      var theTree = new tree.Tree(node1);
       theTree.on('add', function(node) {
         result.push(node);
       });
-      theTree.addSubTree(node1,node2);
+      theTree.signalSubTreeAdded(node1);
 
-      assert.equal(node2, result[0]);
-      assert.equal(node3, result[1]);
+      assert.equal(node1, result[0]);
+      assert.equal(node2, result[1]);
+      assert.equal(node3, result[2]);
     });
   });
 
@@ -95,14 +96,15 @@ describe('Tree', function () {
       var node2 = new TestNode('N2', [node3]);
       var node1 = new TestNode('N1', [node2]);
       var result = [];
-      var theTree = tree.createTree();
+      var theTree = new tree.Tree();
       theTree.on('remove', function(node) {
         result.push(node);
       });
-      theTree.removeSubTree(node1,node2);
+      theTree.signalSubTreeRemoved(node1);
 
       assert.equal(node3, result[0]);
       assert.equal(node2, result[1]);
+      assert.equal(node1, result[2]);
     });
   });
 

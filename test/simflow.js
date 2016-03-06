@@ -6,85 +6,75 @@ var scnDef = {
   models: []
 };
 
+
+var TestModel = function() {
+  sim.EmptyModel.call(this);
+  this.initCalled = false;
+  this.shutdownCalled = false;
+
+  this.init = function(api) {
+    this.initCalled = true;
+  },
+
+  this.shutdown = function(api) {
+    this.shutdownCalled = true;
+  }
+};
+TestModel.prototype = new sim.EmptyModel();
+
+
+
+
 describe('SimFlow', function () {
   describe('when a model is registered in scenario', function () {
     it('simflow should call init', function () {
-      var initCalled = false;	
-      var model = {
-        init: function(api) {
-          initCalled = true;
-        },
-        shutdown: function(api) {
-        }
-      }; 
-      var objectFactory = new sim.ObjectFactory();
-      var scenarioFactory = new sim.ScenarioFactory(objectFactory);
-      var scenario = scenarioFactory.createScenario(scnDef);
+      var modelTree = new TestModel();
+      var scenario = new sim.Scenario();
       var simFlow = new sim.SimFlow(scenario);
-      scenario.addModel(model);
+      scenario.setModelTree(modelTree);
 
       simFlow.start();
       simFlow.tickNext();
 
-      assert.equal(true, initCalled);
+      assert.equal(true, modelTree.initCalled);
     });
   });
 
   describe('when a model is unregistered from scenario', function () {
     it('simflow should call shutdown', function () {
-      var shutdownCalled = false;	
-      var model = {
-        init: function(api) {
-        },
-        shutdown: function(api) {
-          shutdownCalled = true;
-        }
-      }; 
-      var objectFactory = new sim.ObjectFactory();
-      var scenarioFactory = new sim.ScenarioFactory(objectFactory);
-      var scenario = scenarioFactory.createScenario(scnDef);
+      var modelTree = new TestModel();
+      var scenario = new sim.Scenario();
       var simFlow = new sim.SimFlow(scenario);
 
-      scenario.addModel(model);
+      scenario.addModel(undefined, modelTree);
       simFlow.start();
       simFlow.tickNext();
-      scenario.removeModel(model);
+      scenario.removeModel(undefined, modelTree);
       simFlow.tickNext();
 
-      assert.equal(true, shutdownCalled);
+      assert.equal(true, modelTree.shutdownCalled);
     });
   });
 
   describe('when a simflow is terminated', function () {
     it('should call shutdown on models', function () {
-      var shutdownCalled = false;	
-      var model = {
-        init: function(api) {
-        },
-        shutdown: function(api) {
-          shutdownCalled = true;
-        }
-      }; 
-      var objectFactory = new sim.ObjectFactory();
-      var scenarioFactory = new sim.ScenarioFactory(objectFactory);
-      var scenario = scenarioFactory.createScenario(scnDef);
+      var modelTree = new TestModel();
+      var scenario = new sim.Scenario();
       var simFlow = new sim.SimFlow(scenario);
 
-      scenario.addModel(model);
+      scenario.addModel(undefined, modelTree);
       simFlow.start();
       simFlow.tickNext();
       simFlow.terminate();
       simFlow.tickNext();
 
-      assert.equal(true, shutdownCalled);
+      assert.equal(true, modelTree.shutdownCalled);
     });
   });
 
   describe('when a simflow is ticked', function () {
     it('should return delta time on next tick', function () {
-      var objectFactory = new sim.ObjectFactory();
-      var scenarioFactory = new sim.ScenarioFactory(objectFactory);
-      var scenario = scenarioFactory.createScenario(scnDef);
+      var scenario = new sim.Scenario();
       var simFlow = new sim.SimFlow(scenario, 0.5);
 
       simFlow.start();
@@ -97,9 +87,7 @@ describe('SimFlow', function () {
 
   describe('when a simflow is terminated', function () {
     it('should return undefined on last tick', function () {
-      var objectFactory = new sim.ObjectFactory();
-      var scenarioFactory = new sim.ScenarioFactory(objectFactory);
-      var scenario = scenarioFactory.createScenario(scnDef);
+      var scenario = new sim.Scenario();
       var simFlow = new sim.SimFlow(scenario);
 
       simFlow.start();
