@@ -56,6 +56,64 @@ describe('SimFlow', function () {
     });
   });
 
+  describe('when a model is registered in scenario and another is added after som ticks', function () {
+    it('simflow should call init on both', function () {
+      var modelTree = new TestModel();
+      var newModel = new TestModel();
+      var scenario = new sim.Scenario();
+      var simFlow = new sim.SimFlow(scenario);
+      scenario.setModelTree(modelTree);
+
+      simFlow.start();
+      simFlow.tickNext();
+      simFlow.tickNext();
+      scenario.addModel(modelTree, newModel);
+      simFlow.tickNext();
+
+      assert.equal(true, modelTree.initCalled);
+      assert.equal(true, newModel.initCalled);
+    });
+
+    it('simflow should call shutdown on both', function () {
+      var modelTree = new TestModel();
+      var newModel = new TestModel();
+      var scenario = new sim.Scenario();
+      var simFlow = new sim.SimFlow(scenario);
+      scenario.setModelTree(modelTree);
+
+      simFlow.start();
+      simFlow.tickNext();
+      simFlow.tickNext();
+      scenario.addModel(modelTree, newModel);
+      simFlow.tickNext();
+      scenario.removeModel(modelTree, newModel);
+      scenario.removeModel(undefined, modelTree);
+      simFlow.tickNext();
+
+      assert.equal(true, modelTree.shutdownCalled);
+      assert.equal(true, newModel.shutdownCalled);
+    });
+
+    it('simflow should call shutdown on both when terminated', function () {
+      var modelTree = new TestModel();
+      var newModel = new TestModel();
+      var scenario = new sim.Scenario();
+      var simFlow = new sim.SimFlow(scenario);
+      scenario.setModelTree(modelTree);
+
+      simFlow.start();
+      simFlow.tickNext();
+      simFlow.tickNext();
+      scenario.addModel(modelTree, newModel);
+      simFlow.tickNext();
+      simFlow.terminate();
+      simFlow.tickNext();
+
+      assert.equal(true, modelTree.shutdownCalled);
+      assert.equal(true, newModel.shutdownCalled);
+    });
+  });
+
   describe('when a simflow is terminated', function () {
     it('should call shutdown on models', function () {
       var modelTree = new TestModel();
