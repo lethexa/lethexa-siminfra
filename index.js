@@ -10,6 +10,10 @@ var scnDef = {
     name: 'test2',
     type: 'TestModel',
     tickRate: 2.5
+  }, {
+    name: 'test3',
+    type: 'TestModel',
+    tickRate: 1.0
   }]
 };
 
