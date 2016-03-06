@@ -27,6 +27,10 @@ var scenario = new sim.Scenario();
 scenario.setModelTree(modelFactory.createModelTreeFrom(scnDef));
 
 var exec = new sim.Executor(scenario);
+exec.on('timeChanging', function(time) {
+  console.log('time: ', time.absolute, time.delta);
+});
+
 exec.run();
 
 setTimeout(function() {
