@@ -1,7 +1,7 @@
 lethexa-siminfra
 ----------------
 
-Provides a simulation-execution for simmodels.
+Provides a simulation infrastructure for simulation-models.
 
 Installation
 ------------
