@@ -26,6 +26,7 @@
     "mocha": "^2.2.5"
   },
   "dependencies": {
+    "lethexa-adt": "0.0.2",
     "lethexa-scheduler": "0.0.6"
   }
 }
