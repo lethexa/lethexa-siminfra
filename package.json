@@ -1,6 +1,6 @@
 {
   "name": "lethexa-siminfra",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Provides a simulation infrastructure for simmodels",
   "main": "index.js",
   "scripts": { 
