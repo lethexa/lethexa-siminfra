@@ -31,7 +31,7 @@ exec.on('timeChanging', function(time) {
   console.log('time: ', time.absolute, time.delta);
 });
 
-exec.run();
+exec.start();
 
 setTimeout(function() {
   exec.terminate();
